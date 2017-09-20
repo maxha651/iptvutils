@@ -1,0 +1,24 @@
+sudo: required
+dist: trusty
+
+before_install:
+  # Needs more up-to-date Qt than what trusty provides
+  - sudo add-apt-repository --yes ppa:beineri/opt-qt58-trusty
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get -y install qt58base libpcap-dev
+
+script:
+  - source /opt/qt58/bin/qt58-env.sh
+  - /opt/qt58/bin/qmake
+  - make
+
+# Will update Launchpad on tag and successful build
+#deploy:
+#  provider: launchpad
+#  slug: "LAUNCHPAD PROJECT SLUG"
+#  oauth_token: "YOUR OAUTH_TOKEN"
+#  oauth_token_secret: "YOUR OAUTH_TOKEN_SECRET"
+#  on:
+#    tags: true
